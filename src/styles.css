@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-paper: #efe8dc;
+  --color-paper-2: #e4dcce;
+  --color-paper-3: #d9d0c0;
+  --color-ink: #1a1612;
+  --color-ink-soft: #3c352e;
+  --color-muted: #6f675c;
+  --color-faint: #9a9286;
+  --color-line: #d0c6b4;
+  --color-tide: #1f4e5a;
+  --color-tide-fg: #efe8dc;
+  --color-stamp: #8f2d2d;
+  --color-ok: #2c5a3c;
+  --color-ok-fg: #efe8dc;
+  --color-receipt: #f7f1e4;
+  --color-night: #141210;
+  --color-night-fg: #e8e0d4;
+  --color-night-muted: #9a9186;
+  --color-night-line: #2c2824;
+  --color-background: #efe8dc;
+  --color-foreground: #1a1612;
+  --color-border: #d0c6b4;
+  --color-primary: #1f4e5a;
+  --color-primary-foreground: #efe8dc;
+  --color-card: #f7f1e4;
+  --color-destructive: #8f2d2d;
+  --color-ring: #1f4e5a;
+  --color-muted-foreground: #6f675c;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --shadow-page: 0 1px 0 rgb(26 22 18 / 0.04), 0 12px 32px -16px rgb(26 22 18 / 0.18);
+  --shadow-receipt: 0 0 0 1px rgb(26 22 18 / 0.06), 0 18px 40px -24px rgb(26 22 18 / 0.35);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0125rem;
+    line-height: 1.55;
+    background-image:
+      radial-gradient(rgb(26 22 18 / 0.035) 0.6px, transparent 0.6px),
+      linear-gradient(180deg, rgb(239 232 220 / 0.4), transparent 28rem);
+    background-size: 7px 7px, 100% 100%;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-tide);
+    color: var(--color-tide-fg);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+.display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 7.2vw, 5.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.034em;
+  font-weight: 500;
+}
+
+.display-section {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.4vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+.ledger-rule {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    rgb(26 22 18 / 0.07) 27px,
+    rgb(26 22 18 / 0.07) 28px
+  );
+}
+
+.receipt-perforation {
+  background-image: radial-gradient(circle at 0 50%, transparent 6px, var(--color-receipt) 6.5px);
+  background-size: 12px 18px;
+  background-repeat: repeat-y;
+}
+
+.stamp {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 2px solid currentColor;
+  padding: 0.2rem 0.55rem 0.12rem;
+  transform: rotate(-8deg);
+  display: inline-block;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes print-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-in > * {
+  animation: print-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger-in > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.stagger-in > *:nth-child(2) {
+  animation-delay: 120ms;
+}
+.stagger-in > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+.stagger-in > *:nth-child(4) {
+  animation-delay: 280ms;
+}
+.stagger-in > *:nth-child(5) {
+  animation-delay: 360ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .stagger-in > * {
+    animation: none !important;
+  }
+}

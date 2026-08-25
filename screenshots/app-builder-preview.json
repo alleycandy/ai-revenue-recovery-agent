@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Munim — the person at the counter, now for agents",
+      "hasCanvas": false,
+      "bodyTextLen": 5809,
+      "bodyTextHash": "774363135084775594946e6806149e1265d9849b47c38f47072e750fd1c8c545",
+      "bodyTextPrefix": "Munim Rao & Sons · Camp, Pune The book Counter Gaddi Aisle Pitch",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Munim — the person at the counter, now for agents",
+      "hasCanvas": false,
+      "bodyTextLen": 5767,
+      "bodyTextHash": "65c2084392464653320dfa25c3c40a318e58ad178771a2a3f146d236debf33cd",
+      "bodyTextPrefix": "Munim The book Counter Gaddi Aisle Pitch TRACK 01 · AGENTIC COMM",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
