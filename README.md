@@ -1,119 +1,97 @@
 # 🧾 Munim
 
-### An AI-assisted commerce and payment workflow for agentic buyers
+## AI-Assisted Commerce & Payment Workflow for Agentic Buyers
 
-Munim is an experimental agentic commerce application that makes a traditional merchant **discoverable, understandable, and safely transactable by AI agents**.
-
-The project demonstrates an important principle:
+Munim is an experimental **AI-assisted commerce and payment workflow platform** designed to make traditional merchants discoverable, understandable, and safely transactable by AI agents.
 
 > **AI can understand intent and propose actions, but deterministic systems should control money.**
 
-Munim combines an AI-powered purchasing conversation with strict rule-based logic for inventory, pricing, mandates, payment capture, retries, and auditing.
-
 ---
 
-## ✨ The Problem
+## 📌 About the Project
 
-Traditional merchants may already accept digital payments, but they are often invisible to AI purchasing agents.
+Traditional merchants may already accept digital payments, but they are often difficult for AI purchasing agents to understand and interact with.
 
-An AI agent needs to understand:
+An AI agent needs structured information about:
 
-- What products a merchant sells
-- Product aliases and natural language names
-- Available stock
+- Products and SKUs
+- Product aliases
+- Available inventory
 - Prices
 - GST
-- Substitutions
+- Product substitutions
 - Merchant rules
-- Payment boundaries
+- Payment limits
 
-Munim creates an **agent-readable commerce layer** around a merchant while keeping financial actions controlled by deterministic business rules.
+Munim creates an **agent-readable commerce layer** around a merchant while ensuring that sensitive financial actions remain controlled by deterministic business logic.
 
 ---
 
-## 🚀 What Munim Does
+## ✨ Features
 
-### 🛒 AI Counter
+### 🤖 AI-Powered Counter
 
-An AI-powered counter where a buyer or purchasing agent can:
+The AI-powered Counter allows buyers or AI agents to:
 
-- Search for products using natural language
+- Search products using natural language
+- Understand product aliases
 - Add products to an order
-- Request a quote
-- Create a payment mandate
-- Capture a payment
-- Retry failed payments within defined limits
-
-The AI acts as the conversational interface.
-
-It does **not** control the financial system directly.
+- Request quotes
+- Create payment mandates
+- Capture payments
+- Handle payment failures
+- Perform controlled retries
 
 ---
 
-### 🧠 AI-Powered Product Understanding
+### 🏪 Agent-Readable Aisle
 
-The AI understands product information such as:
+The Aisle provides structured product information for both humans and AI agents.
 
-- Product names
-- SKU codes
-- Alternative names and aliases
-- Product categories
-- Stock availability
-- Substitution rules
-- Merchant-specific product notes
+Each product can include:
 
-Example:
+- Product name
+- SKU
+- Product aliases
+- Category
+- Unit
+- Pack quantity
+- Price
+- MRP
+- Available stock
+- GST
+- Origin
+- Agent instructions
+- Allowed substitutions
+
+The catalog can also be made available as structured JSON for AI-agent interaction.
+
+---
+
+### 📒 Gaddi — Merchant Control Panel
+
+The Gaddi acts as the merchant's control center.
+
+It allows merchants to:
+
+- View orders
+- Monitor transactions
+- Manage inventory
+- Configure business rules
+- Review payment mandates
+- Track audit records
+- Monitor agent activity
+- Restock products
+
+This creates a clear boundary between **AI automation and merchant control**.
+
+---
+
+## 🔐 Safe Payment Architecture
+
+Munim follows a controlled payment workflow:
 
 ```text
-"thick poha"
-"jada poha"
-"poha thick"
-
-can all map to the appropriate product SKU.
-
-🏪 Agent-Readable Aisle
-
-The Aisle allows products to be viewed by both humans and AI agents.
-
-Each product contains structured information such as:
-
-SKU
-Product name
-Aliases
-Category
-Unit
-Pack quantity
-Price
-MRP
-Available stock
-GST
-Origin
-Agent instructions
-Allowed substitutions
-
-The complete catalog can also be exported as structured JSON.
-
-📒 Gaddi — Merchant Control Panel
-
-The Gaddi is the merchant's control layer.
-
-It allows the merchant to:
-
-View the order ledger
-Monitor agent transactions
-View audit records
-Configure payment rules
-Approve held mandates
-Manage inventory
-Restock products
-Monitor spending
-
-This area represents the boundary between AI automation and human control.
-
-🔐 Payment Safety Model
-
-Munim follows a strict payment workflow:
-
 AI Buyer
    │
    ▼
@@ -129,7 +107,7 @@ Deterministic Quote Engine
 Payment Mandate
    │
    ▼
-Approval / Validation
+Validation & Approval
    │
    ▼
 Payment Capture
@@ -137,137 +115,114 @@ Payment Capture
    ▼
 Audit Trail
 
-The AI can suggest an action, but the payment engine validates it.
+The AI can propose an action, but the system validates it before any sensitive operation is performed.
 
-🛡️ Safety Rules
+🛡️ Core Safety Principles
 
-Munim uses deterministic rules for sensitive financial operations.
+Munim prevents AI from becoming the source of truth for financial operations.
 
-The system prevents:
-AI-generated prices
-Invalid SKUs
-Insufficient stock purchases
-Undisclosed substitutions
-Payments above mandate limits
-Payments without approved mandates
-Unlimited payment retries
-Expired mandate payments
+The deterministic system validates:
+
+❌ AI-generated prices
+❌ Invalid SKUs
+❌ Insufficient stock
+❌ Undisclosed substitutions
+❌ Payments above mandate limits
+❌ Unauthorized payments
+❌ Unlimited payment retries
+❌ Expired payment mandates
 Core Principle
 AI proposes.
 The deterministic engine verifies.
 The merchant controls.
-💳 Payment Flow
+💳 Payment Workflow
 
-The project uses a Razorpay-shaped test-mode payment adapter.
+The application uses a test-mode payment workflow designed to simulate real-world payment operations.
 
-The payment object is designed to resemble a real payment workflow while ensuring that:
-
-No real money leaves the application.
-
-Payment workflow
-Quote
-  ↓
-Mandate Created
-  ↓
-Mandate Approved
-  ↓
+Quote Created
+      ↓
+Payment Mandate Created
+      ↓
+Mandate Validation
+      ↓
 Payment Capture
-  ↓
+      ↓
 Payment Success / Failure
-  ↓
-Audit Event
+      ↓
+Audit Record Created
+
+The architecture ensures that financial actions follow predefined rules and remain auditable.
+
 ⚠️ Failure Handling
 
-Munim intentionally includes a payment failure scenario.
-
-The merchant can simulate a failed payment.
+Munim includes controlled payment failure scenarios.
 
 Example:
 
-UPI collect expires
+Payment Attempt
       ↓
-Payment marked as failed
+Payment Fails
       ↓
-One retry allowed
+Failure Recorded
       ↓
-Retry limit reached
+Retry Allowed?
       ↓
-Transaction stops
+Yes → Controlled Retry
+No  → Transaction Stops
 
-This demonstrates that an autonomous system should know when to stop rather than repeatedly attempting financial actions.
+The system ensures that payment retries remain bounded and prevents uncontrolled financial operations.
 
-🧩 Main Features
-🤖 AI-powered merchant conversation
-🛒 Natural language product selection
-📦 Structured product catalog
-🔎 Product aliases and semantic matching
-🧾 Deterministic quote generation
-📊 Inventory validation
-💰 GST-aware pricing
-🔐 Bounded payment mandates
-👤 Buyer identification
-💳 Test-mode payment capture
-🔁 Controlled payment retry
-🚫 Payment failure handling
-📜 Complete audit trail
-🏪 Merchant control dashboard
-📦 Inventory management
-📋 Agent-readable JSON catalog
-🗂️ Application Pages
+🧩 Main Application Modules
 🏠 The Book
 
 The main landing and story page of Munim.
 
-Introduces the merchant and explains the agentic commerce workflow.
+It introduces the project and explains how AI agents can interact with merchants safely.
 
 🛒 Counter
 
 The AI-powered purchasing interface.
 
-Buyers can interact with Munim to:
+Users or AI agents can:
 
-Search products
-Build an order
+Search for products
+Add products to orders
 Request quotes
-Create mandates
+Create payment mandates
 Capture payments
-
-A scripted hotel breakfast order is also included as a demonstration flow.
-
 📒 Gaddi
 
-Merchant management and control dashboard.
+The merchant management dashboard.
 
-Includes:
+It provides access to:
 
-Ledger
-Wall rules
-Merchant book
-Payment approval
+Order records
+Payment activity
+Inventory
+Merchant rules
 Audit records
-Inventory information
+Mandate management
 🏷️ Aisle
 
-The structured catalog interface.
+The structured merchant catalog.
 
-Products can be viewed as:
+It provides product information for both:
 
-Human-readable information
-Agent-readable data
-JSON catalog
+Human users
+AI agents
 🎯 Pitch
 
-Explains:
+The project explanation area covering:
 
 The problem
+The proposed solution
 System architecture
-Payment safety model
-Design decisions
-Failure scenarios
 AI boundaries
+Payment safety
+Failure handling
 🏗️ Tech Stack
 Frontend
-React 19
+React
 TypeScript
 Vite
 Tailwind CSS
@@ -277,13 +232,12 @@ TanStack Start
 State Management
 Zustand
 AI
-xAI API
-Grok
+xAI / Grok API
 Database
 PostgreSQL
 PGlite
 Kysely
-UI
+UI Components
 Radix UI
 Lucide React
 Validation
@@ -316,17 +270,13 @@ Zod
 │   └── styles.css
 │
 ├── server
-│
 ├── scripts
-│
 ├── public
-│
 ├── package.json
-│
 └── README.md
 🤖 AI Architecture
                  ┌─────────────────┐
-                 │   AI BUYER      │
+                 │    AI BUYER     │
                  └────────┬────────┘
                           │
                           ▼
@@ -339,21 +289,21 @@ Zod
                  ┌─────────────────┐
                  │ ACTION PROPOSAL │
                  │                 │
-                 │ • Add SKU       │
-                 │ • Quote         │
-                 │ • Mandate       │
-                 │ • Capture       │
+                 │ • Add Product   │
+                 │ • Create Quote  │
+                 │ • Create Mandate│
+                 │ • Capture Pay   │
                  └────────┬────────┘
                           │
                           ▼
               ┌────────────────────────┐
               │ DETERMINISTIC ENGINE   │
               │                        │
-              │ ✓ Validate stock       │
-              │ ✓ Validate price       │
+              │ ✓ Validate Stock       │
+              │ ✓ Validate Price       │
               │ ✓ Validate GST         │
-              │ ✓ Validate mandate     │
-              │ ✓ Validate limits      │
+              │ ✓ Validate Mandate     │
+              │ ✓ Validate Limits      │
               └────────────┬───────────┘
                            │
                            ▼
@@ -369,36 +319,31 @@ Zod
 
 Clone the repository:
 
-git clone https://github.com/alleycandy/ai-revenue-recovery-agent.git
+git clone <your-repository-url>
 
-Go to the project directory:
+Navigate to the project folder:
 
-cd ai-revenue-recovery-agent
+cd <project-folder>
 
 Install dependencies:
 
 npm install
 🔑 Environment Variables
 
-Create an environment file for your API key.
+Create an environment file and add your API key.
 
 Example:
 
-XAI_API_KEY=your_xai_api_key_here
-
-The AI functionality requires an xAI API key.
-
-If the key is not configured, the application can still demonstrate the scripted purchasing flow.
-
-▶️ Run the Application
+XAI_API_KEY=your_api_key_here
+▶️ Running the Project
 
 Start the development server:
 
 npm run dev
+🏗️ Build the Project
 
-The application will run on the configured local development server.
+Create a production build:
 
-🧪 Build the Project
 npm run build
 
 Run type checking:
@@ -412,19 +357,19 @@ npm test
 Run linting:
 
 npm run lint
-🧠 Example AI Actions
+🧠 Example AI Action
 
-The AI returns structured actions instead of directly manipulating financial systems.
+The AI returns structured actions instead of directly controlling sensitive systems.
 
 Example:
 
 {
-  "say": "Six kilograms of thick poha are available.",
+  "say": "The requested product is available.",
   "actions": [
     {
       "op": "add",
-      "sku": "POH-THK-1",
-      "qty": 6
+      "sku": "PRODUCT-SKU",
+      "qty": 2
     },
     {
       "op": "quote"
@@ -432,34 +377,11 @@ Example:
   ]
 }
 
-The application then validates these actions using deterministic business logic.
-
-📊 Merchant Example
-
-The demo merchant is:
-
-Rao & Sons
-Camp, Pune
-
-The merchant catalog includes products such as:
-
-Rice
-Atta
-Poha
-Cooking oil
-Spices
-Pickles
-Tea
-Pulses
-Dairy products
-Papad
-Sweets
-
-Each product contains inventory and commerce constraints for safe agent transactions.
+The application validates every action through deterministic business logic.
 
 🎯 Design Philosophy
 
-Munim is built around one important question:
+Munim is built around an important question:
 
 What should an AI agent be allowed to do when money is involved?
 
@@ -480,20 +402,19 @@ But AI should not be the source of truth for:
 • Retry policies
 • Payment execution
 
-Those decisions belong to deterministic systems and merchant-controlled policies.
+These responsibilities belong to deterministic systems and merchant-controlled policies.
 
 🔮 Future Improvements
 Real payment gateway integration
-Live merchant onboarding
 Multi-merchant support
-Persistent order history
-Advanced AI tool calling
-Agent-to-agent commerce protocol
-Real-time inventory synchronization
 Merchant authentication
+Persistent transaction history
+Real-time inventory synchronization
+Advanced AI tool calling
+Agent-to-agent commerce
 Payment webhooks
 Analytics dashboard
 Production deployment
 📜 License
 
-This project is currently intended for educational, experimental, and demonstration purposes.
+This project is intended for educational, experimental, and demonstration purposes.
